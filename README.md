@@ -57,7 +57,7 @@ aws cloudformation deploy \
 |-----------|---------|-------------|
 | `BucketName` | `gti-guard-duty-integration` | S3 bucket name to create (must be globally unique) |
 | `SecretKey` | `GTI_API_KEY` | Secrets Manager secret name to create (must be globally unique) |
-| `ScheduleExpression` | `cron(0 11 ? * MON-FRI *)` | EventBridge cron expression for Lambda schedule |
+| `ScheduleExpression` | `cron(0 * * * ? *)` | EventBridge cron expression for Lambda schedule |
 
 ### Filtering
 | Parameter | Default | Description |
@@ -84,7 +84,7 @@ aws cloudformation deploy \
 
 ## How It Works
 
-1. **EventBridge** triggers Lambda on schedule (default: weekdays at 11:00 UTC)
+1. **EventBridge** triggers Lambda on schedule (default: every hour)
 2. **Lambda** retrieves GTI API key from Secrets Manager
 3. **Lambda** fetches IOCs from GTI IOC Stream and Threat Lists APIs
 4. Valid IOCs are written to **S3** threat list files

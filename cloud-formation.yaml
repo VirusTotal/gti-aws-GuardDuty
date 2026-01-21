@@ -1,6 +1,51 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: CloudFormation template to deploy GTI integration with GuardDuty, including S3 bucket, empty threat list files, GuardDuty ThreatIntelSets, Secrets Manager secret, Lambda function, and scheduled EventBridge rule.
 
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: "Required Configuration"
+        Parameters:
+          - SecretValue
+      - Label:
+          default: "General Configuration"
+        Parameters:
+          - BucketName
+          - SecretKey
+          - ScheduleExpression
+      - Label:
+          default: "Filtering Options"
+        Parameters:
+          - SeverityFilter
+          - ThreatLists
+          - LookbackDays
+      - Label:
+          default: "Advanced Settings"
+        Parameters:
+          - EntityFiles
+          - IpFiles
+    
+    ParameterLabels:
+      SecretValue:
+        default: "GTI API Key"
+      BucketName:
+        default: "S3 Bucket Name"
+      SecretKey:
+        default: "Secrets Manager Secret Name"
+      ScheduleExpression:
+        default: "Lambda Schedule (Cron Expression)"
+      SeverityFilter:
+        default: "Severity Filter"
+      ThreatLists:
+        default: "Threat List Categories"
+      LookbackDays:
+        default: "Lookback Days"
+      EntityFiles:
+        default: "Domain Threat List Files"
+      IpFiles:
+        default: "IP Threat List Files"
+
 Parameters:
   # Required
   SecretValue:
