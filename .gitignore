@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+env/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# IDE/Editor specific files
+.idea/
+.vscode/
+*.swp
+*.bak
+
+# Log files
+*.log
+
+# Sensitive configuration files (example)
+config.ini
+.env
+
+# Build artifacts
+dist/
+build/
+
+# Operating System files
+.DS_Store
+Thumbs.db
