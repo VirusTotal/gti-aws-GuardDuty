@@ -1017,7 +1017,7 @@ Resources:
 
                   # Fetch data for each hour from start_ts to time_stamp
                   current = start_dt
-                  while current < current_dt:
+                  while current <= current_dt:
                       hour_ts = current.strftime("%Y%m%d%H")
                       self._process_single_hour_threat_list(category, hour_ts, checkpoint)
                       current += timedelta(hours=1)
@@ -1026,10 +1026,10 @@ Resources:
               def fetch_threat_list_iocs(self, checkpoint: dict):
                   """
                   Fetch categorized threat lists.
-                  Only pulls categories from last hour.
+                  Only pulls hourly threat lists up to 2 hours before the current UTC hour.
                   """
 
-                  current_ts = datetime.now(timezone.utc).strftime("%Y%m%d%H")
+                  current_ts = (datetime.now(timezone.utc) - timedelta(hours=2)).strftime("%Y%m%d%H")
                   print(f"[INFO] Fetching threat lists | timestamp={current_ts}")
 
                   categories: set[str] = set()

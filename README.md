@@ -123,6 +123,7 @@ aws cloudformation deploy \
 ### Categorized Threat Lists API
 - **Endpoint:** GTI Threat Lists API
 - **Granularity:** Hourly buckets (format: `YYYYMMDDHH`)
+- **Delay:** Threat lists are fetched up to 2 hours behind the current UTC hour (latest hour fetched = `now - 2h`)
 - **Pagination:** Up to 4,000 IOCs per request
 - **Checkpointing:** Tracks last processed hour per category
 
